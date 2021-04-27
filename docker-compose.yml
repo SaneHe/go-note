@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  work-client:
+    build:
+      context: ./
+    container_name: work-client
+#    restart: always
+#    expose:
+#      - 8080
+    ports:
+      - "8880:8080"

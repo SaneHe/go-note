@@ -1,13 +1,12 @@
 package service
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 	zh2 "github.com/go-playground/locales/zh"
 	ut "github.com/go-playground/universal-translator"
 	"github.com/go-playground/validator/v10"
-	zhtrans "github.com/go-playground/validator/v10/translations/zh"
+	. "github.com/go-playground/validator/v10/translations/zh"
 	"net/http"
 	"net/url"
 	"reflect"
@@ -39,12 +38,11 @@ func init() {
 
 	zh := zh2.New()
 	uni = ut.New(zh, zh)
-	trans,_  = uni.GetTranslator("zh")
+	trans, _ = uni.GetTranslator("zh")
 	if v, ok := binding.Validator.Engine().(*validator.Validate); ok {
-		zhtrans.RegisterDefaultTranslations(v, trans)
+		RegisterDefaultTranslations(v, trans)
 		v.RegisterTagNameFunc(func(field reflect.StructField) string {
-			fmt.Println(field.Tag.Get("label"))
-			if label := field.Tag.Get("label"); label != ""{
+			if label := field.Tag.Get("label"); label != "" {
 				return label + " "
 			}
 			return field.Name
@@ -58,7 +56,7 @@ func init() {
  * @param err
  * @return []string
  */
-func (wx *WorkClient) Translate(err error) []string  {
+func (wx *WorkClient) Translate(err error) []string {
 	var errorList []string
 	errors := err.(validator.ValidationErrors)
 
@@ -86,9 +84,9 @@ func (wx *WorkClient) execQuery(isToken bool, method, path string, data interfac
 			path = config.WorkApiHost + "/" + strings.TrimLeft(path, "/")
 		}
 
-		urlInfo, error := url.Parse(path)
-		if error != nil {
-			panic(error)
+		urlInfo, err := url.Parse(path)
+		if err != nil {
+			panic(err)
 		}
 
 		if len(urlInfo.RawQuery) == 0 || !strings.Contains(urlInfo.RawQuery, "access_token") {
@@ -109,17 +107,17 @@ func (wx *WorkClient) execQuery(isToken bool, method, path string, data interfac
  */
 func (wx *WorkClient) GetDailyPunch(c *gin.Context) {
 	var data request.PunchBody
-	if error := c.ShouldBindJSON(&data); error != nil {
-		c.JSON(http.StatusUnprocessableEntity, wx.Translate(error))
+	if err := c.ShouldBindJSON(&data); err != nil {
+		c.JSON(http.StatusUnprocessableEntity, wx.Translate(err))
 		return
 	}
 
 	c.String(http.StatusOK, string(
 		wx.execQuery(true,
-		"POST",
-		"cgi-bin/checkin/getcheckin_daydata",
-		data,
-		map[string]string{"content-type": "application/json; charset=utf-8"})))
+			"POST",
+			"cgi-bin/checkin/getcheckin_daydata",
+			data,
+			map[string]string{"content-type": "application/json; charset=utf-8"})))
 }
 
 /**
@@ -127,19 +125,19 @@ func (wx *WorkClient) GetDailyPunch(c *gin.Context) {
  * @receiver wx
  * @param c
  */
-func (wx *WorkClient) GetMonthPunch(c *gin.Context)  {
+func (wx *WorkClient) GetMonthPunch(c *gin.Context) {
 	var data request.PunchBody
-	if error := c.ShouldBindJSON(&data); error != nil{
-		c.JSON(http.StatusUnprocessableEntity, wx.Translate(error))
+	if err := c.ShouldBindJSON(&data); err != nil {
+		c.JSON(http.StatusUnprocessableEntity, wx.Translate(err))
 		return
 	}
 
 	c.String(http.StatusOK, string(
 		wx.execQuery(true,
-		"POST",
-		"cgi-bin/checkin/getcheckin_monthdata",
-		data,
-		map[string]string{"content-type": "application/json; charset=utf-8"})))
+			"POST",
+			"cgi-bin/checkin/getcheckin_monthdata",
+			data,
+			map[string]string{"content-type": "application/json; charset=utf-8"})))
 }
 
 /**
@@ -147,10 +145,10 @@ func (wx *WorkClient) GetMonthPunch(c *gin.Context)  {
  * @receiver wx
  * @param c
  */
-func (wx *WorkClient) GetPunchRecord(c *gin.Context)  {
+func (wx *WorkClient) GetPunchRecord(c *gin.Context) {
 	var data request.PunchRecord
-	if error := c.ShouldBindJSON(&data); error != nil {
-		c.JSON(http.StatusUnprocessableEntity, wx.Translate(error))
+	if err := c.ShouldBindJSON(&data); err != nil {
+		c.JSON(http.StatusUnprocessableEntity, wx.Translate(err))
 		return
 	}
 

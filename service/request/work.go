@@ -12,22 +12,22 @@ func (l LocalDateTimeString) String() string {
 	return time.Time(l).Format(config.App.Logger.LogTimestampFormat)
 }
 
-func (l *LocalDateTimeString) UnmarshalJSON(data []byte) error  {
+func (l *LocalDateTimeString) UnmarshalJSON(data []byte) error {
 
 	if string(data) == "null" {
 		return nil
 	}
-	now, error := time.Parse(strconv.Quote(config.App.Logger.LogTimestampFormat), string(data))
+	now, err := time.Parse(strconv.Quote(config.App.Logger.LogTimestampFormat), string(data))
 
-	if error != nil {
-		return error
+	if err != nil {
+		return err
 	}
 	*l = LocalDateTimeString(now)
 
 	return nil
 }
 
-func (l LocalDateTimeString) MarshalJSON() ([]byte, error)  {
+func (l LocalDateTimeString) MarshalJSON() ([]byte, error) {
 	return ([]byte)(strconv.FormatInt(time.Time(l).Unix(), 10)), nil
 }
 
@@ -36,7 +36,7 @@ func (l LocalDateTimeString) MarshalJSON() ([]byte, error)  {
  */
 type PunchBody struct {
 	StartTime  LocalDateTimeString `json:"starttime" binding:"required" time_format:"2006-01-02 15:04:05" label:"开始时间"`
-	EndTime    LocalDateTimeString `json:"endtime" binding:"required" time_format:"2006-01-02 15:04:05" label:"结束时间"`
+	EndTime    LocalDateTimeString `json:"endtime" binding:"required,gtfield=StartDate" time_format:"2006-01-02 15:04:05" label:"结束时间"`
 	UserIdList []string            `json:"useridlist" binding:"required" label:"人员列表"`
 }
 

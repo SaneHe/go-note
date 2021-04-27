@@ -1,2 +1,5 @@
 static/*.log
 tmp/
+server*
+.idea
+.vscode
