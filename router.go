@@ -6,6 +6,7 @@ import (
 	. "work-wechat/config"
 	"work-wechat/middleware"
 	"work-wechat/service"
+	"work-wechat/service/practice"
 )
 
 /**
@@ -23,6 +24,12 @@ func initRouter() *gin.Engine {
 	//}
 
 	router := gin.New()
+
+	// 测试
+	router.GET("/test", func(context *gin.Context) {
+		practice.Exec()
+	})
+
 	router.Use(middleware.LoggerToFile(), gin.Recovery())
 	router.GET("/", func(context *gin.Context) {
 		context.String(http.StatusOK, "welcome")
@@ -37,6 +44,5 @@ func initRouter() *gin.Engine {
 	workRouter.POST("/punch/daily", service.WxApp.GetDailyPunch)
 	// 打开月报
 	workRouter.POST("/punch/month", service.WxApp.GetMonthPunch)
-
 	return router
 }
