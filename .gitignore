@@ -1,6 +1,7 @@
 static/*.log
 tmp/
 server*
-.idea
-.vscode
+.vscode/
 .run/
+vendor/
+.idea/

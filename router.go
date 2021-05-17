@@ -6,6 +6,7 @@ import (
 	. "work-wechat/config"
 	"work-wechat/middleware"
 	"work-wechat/service"
+	message_queue "work-wechat/service/message-queue"
 	"work-wechat/service/practice"
 )
 
@@ -28,6 +29,14 @@ func initRouter() *gin.Engine {
 	// 测试
 	router.GET("/test", func(context *gin.Context) {
 		practice.Exec()
+	})
+
+	router.GET("/enqueue", func(context *gin.Context) {
+		message_queue.Enqueue()
+	})
+
+	router.GET("/consumer", func(context *gin.Context) {
+		message_queue.Consumer()
 	})
 
 	router.Use(middleware.LoggerToFile(), gin.Recovery())

@@ -2,6 +2,7 @@ package practice
 
 import (
 	"fmt"
+	"runtime"
 	"sync"
 	"time"
 )
@@ -17,7 +18,8 @@ func Exec() {
 	//channel2Go()
 	//channel3Go()
 	//worker()
-	deadLock()
+	//deadLock()
+	timerTest() // timer 文件
 }
 
 /**
@@ -132,12 +134,18 @@ func worker() {
 func deadLock() {
 	ch1 := make(chan int)
 	// 死锁
-	//go fmt.Println(<-ch1)
+	// go fmt.Println(<-ch1)
+
+	a := "sane何何何"
+	fmt.Println(len(a))
+
+	fmt.Println(len([]rune(a)))
 
 	// 正常
 	go func() {
-		fmt.Println(<-ch1)
+		fmt.Println("channel value: ", <-ch1)
 	}()
 	ch1 <- 5
 	time.Sleep(1 * time.Second)
+	fmt.Println("number of goroutines:", runtime.NumGoroutine())
 }

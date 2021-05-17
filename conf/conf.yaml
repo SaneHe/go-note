@@ -16,7 +16,7 @@ work:
 
 redis:
   host: 106.75.100.82:63790
-  passwd: practice@xiaoKaka#22
+  passwd: test@xiaoKaka#22
   database: 7
 
 mysql:
