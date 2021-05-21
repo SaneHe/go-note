@@ -8,6 +8,7 @@ import (
 	"work-wechat/service"
 	message_queue "work-wechat/service/message-queue"
 	"work-wechat/service/practice"
+	"work-wechat/service/rpc"
 )
 
 /**
@@ -25,6 +26,20 @@ func initRouter() *gin.Engine {
 	//}
 
 	router := gin.New()
+
+	rpcRouter := router.Group("rpc")
+	{
+		// 启动 rpc server
+		rpcRouter.GET("server", func(context *gin.Context) {
+			rpc.RunRpcServer()
+		})
+
+		// 调用方法
+		rpcRouter.GET("call", func(context *gin.Context) {
+			//rpc.CallRpcFunc()
+			rpc.GoFunc()
+		})
+	}
 
 	// 测试
 	router.GET("/test", func(context *gin.Context) {

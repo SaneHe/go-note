@@ -18,10 +18,10 @@ type token struct {
 }
 
 type response struct {
-	ErrCode int64 `json:"errcode"`
-	ErrMsg string `json:"errmsg"`
-	AccessToken string `json:"access_token"`
-	ExpiresIn time.Duration `json:"expires_in"`
+	ErrCode     int64         `json:"errcode"`
+	ErrMsg      string        `json:"errmsg"`
+	AccessToken string        `json:"access_token"`
+	ExpiresIn   time.Duration `json:"expires_in"`
 }
 
 /**
@@ -51,7 +51,7 @@ func (t *token) syncToken() {
 	t.mutex.Lock()
 	defer t.mutex.Unlock()
 
-	resp := util.HttpGet( config.WorkApiHost + "/cgi-bin/gettoken" + "?" + t.intoUrlValues())
+	resp := util.HttpGet(config.WorkApiHost + "/cgi-bin/gettoken" + "?" + t.intoUrlValues())
 	var respData response
 	if error := json.Unmarshal(resp, &respData); error != nil {
 		panic(error)

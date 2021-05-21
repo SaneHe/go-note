@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="10ec24b2-b77a-407d-8653-29c5adead7b0" name="默认的" comment="goroutine测试">
-      <change afterPath="$PROJECT_DIR$/service/message-queue/client.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/message-queue/workers.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/practice/timer.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="10ec24b2-b77a-407d-8653-29c5adead7b0" name="默认的" comment="mq测试">
+      <change afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/short-url/key.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/short-url/store.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/short-url/store.gob" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/conf/conf.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/conf/conf.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logger/log.go" beforeDir="false" afterPath="$PROJECT_DIR$/logger/log.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/router.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/practice/wait-go.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/practice/wait-go.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/token.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/token.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/util.go" beforeDir="false" afterPath="$PROJECT_DIR$/util/util.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +127,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="增加 docker 部署以及编译命令" />
     <MESSAGE value="goroutine测试" />
-    <option name="LAST_COMMIT_MESSAGE" value="goroutine测试" />
+    <MESSAGE value="mq测试" />
+    <option name="LAST_COMMIT_MESSAGE" value="mq测试" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>

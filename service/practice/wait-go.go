@@ -11,15 +11,23 @@ const loop = 10
 
 var lastNum int
 
+func testSlice() {
+	s := []int{9, 8, 7}
+	p := &s
+	r := *p
+	r[0] = 11
+	fmt.Println(s[0])
+}
+
 func Exec() {
 	// waitGo
 	// channelGo()
 	//channel1Go()
 	//channel2Go()
 	//channel3Go()
-	//worker()
+	worker()
 	//deadLock()
-	timerTest() // timer 文件
+	//timerTest() // timer 文件
 }
 
 /**
@@ -113,14 +121,21 @@ func channel3Go() {
  * @Description: 定时任务
  */
 func worker() {
-	ticker := time.NewTicker(1 * time.Second)
+	ticker := time.NewTicker(2 * time.Second)
+	timeout := time.After(4 * time.Second)
 
 	for {
 		select {
 		case current := <-ticker.C:
 			fmt.Println("执行 1s 定时任务: ", current.String())
-		case <-time.After(4 * time.Second):
+		case <-time.After(2 * time.Second):
 			ticker.Stop()
+			fmt.Println("timer stop by system")
+			return
+		case <-timeout:
+			ticker.Stop()
+			fmt.Println("timer stop by timeout")
+			return
 			//default:
 			//	fmt.Println("failed")
 		}

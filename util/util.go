@@ -20,7 +20,7 @@ var client = http.Client{Timeout: 10 * time.Second}
  * @param url
  * @return []byte
  */
-func HttpGet( url string) []byte {
+func HttpGet(url string) []byte {
 	return DoRequest("GET", url, nil, nil)
 }
 
