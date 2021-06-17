@@ -1,0 +1,9 @@
+static/*.log
+tmp/
+server*
+.vscode/
+.run/
+vendor/
+.idea
+/conf/conf.yaml
+.idea
