@@ -5,7 +5,7 @@ ENV GOPROXY=https://goproxy.io,direct
 
 WORKDIR /work-wechat
 COPY . .
-RUN go env && go build -o server .
+RUN go env && go mod tidy && go build -o server .
 
 FROM alpine:latest
 

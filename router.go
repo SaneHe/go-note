@@ -26,7 +26,6 @@ func initRouter() *gin.Engine {
 	//}
 
 	router := gin.New()
-
 	rpcRouter := router.Group("rpc")
 	{
 		// 启动 rpc server
@@ -42,23 +41,27 @@ func initRouter() *gin.Engine {
 	}
 
 	// 测试
-	router.GET("/test", func(context *gin.Context) {
-		practice.Exec()
-	})
+	rTest := router.Group("test")
+	{
+		rTest.GET("", func(context *gin.Context) {
+			practice.Exec()
+		})
 
-	router.GET("/enqueue", func(context *gin.Context) {
-		message_queue.Enqueue()
-	})
+		// 队列入队 -- 未完成
+		rTest.GET("/enqueue", func(context *gin.Context) {
+			message_queue.Enqueue(context)
+		})
 
-	router.GET("/consumer", func(context *gin.Context) {
-		message_queue.Consumer()
-	})
+		// runner 测试
+		rTest.GET("/runner", practice.RunTest)
+	}
 
 	router.Use(middleware.LoggerToFile(), gin.Recovery())
 	router.GET("/", func(context *gin.Context) {
 		context.String(http.StatusOK, "welcome")
 	})
 
+	// 企业微信
 	workRouter := router.Group("work", func(c *gin.Context) {
 		c.Writer.Header().Add("content-type", "application/json; charset=utf-8")
 	})

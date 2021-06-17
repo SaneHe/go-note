@@ -5,3 +5,4 @@ server*
 .run/
 vendor/
 .idea/
+/conf/conf.yaml

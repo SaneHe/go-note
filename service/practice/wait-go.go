@@ -164,3 +164,9 @@ func deadLock() {
 	time.Sleep(1 * time.Second)
 	fmt.Println("number of goroutines:", runtime.NumGoroutine())
 }
+
+//func hash(){
+//	file, err := os.Open("main.go")
+//	defer file.Close()
+//
+//}
