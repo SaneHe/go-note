@@ -1,0 +1,5 @@
+static/*.log
+tmp/
+server
+.run/
+.idea

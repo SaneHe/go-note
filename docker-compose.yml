@@ -1,12 +1,14 @@
 version: "3"
 
 services:
-  work-client:
+  go-note:
     build:
       context: ./
-    container_name: work-client
+    container_name: go-note
 #    restart: always
-#    expose:
-#      - 8080
+    expose:
+      - 8080
     ports:
       - "8880:8080"
+    networks:
+      - default
